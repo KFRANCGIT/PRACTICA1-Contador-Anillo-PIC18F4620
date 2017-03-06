@@ -1,0 +1,31 @@
+#include <18f4620.h>
+#use delay(clock=32M)
+#fuses INTRC_IO, NOFCMEN, NOIESO, PUT, NOBROWNOUT, NOWDT
+#fuses NOPBADEN, NOMCLR, STVREN, NOLVP, NODEBUG
+
+
+
+void main(void){
+      
+      unsigned int8 bitEstados = 128;      //Variable inicializada con un valor de [10000000] en binario
+      unsigned int8 resultado = 0;         //Variable para guardar el resultado del desplazamiento
+      unsigned int8 varDesplazar = 0;      //Variable contador de numero de bits a desplazar
+      SET_TRIS_B(0x00);
+      setup_oscillator(OSC_32MHZ);
+      
+      
+      while(true){
+         
+         resultado = bitEstados >> varDesplazar;
+         output_b(resultado);
+         delay_ms(500);
+       
+         varDesplazar++;
+        
+         if(varDesplazar == 8){
+            varDesplazar = 0;
+         }     
+      }
+      
+  
+}
