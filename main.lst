@@ -1,0 +1,125 @@
+CCS PCH C Compiler, Version 5.012, 41559               05-mar.-17 22:14
+
+               Filename:   D:\OneDrive\INGENIERIA TELEMATICA\4° Semestre\Sistemas Embebidos\PRACTICA1\main.lst
+
+               ROM used:   122 bytes (0%)
+                           Largest free fragment is 65414
+               RAM used:   8 (0%) at main() level
+                           9 (0%) worst case
+               Stack used: 1 locations
+               Stack size: 31
+
+*
+00000:  GOTO   002C
+.................... #include <18f4620.h> 
+.................... ///////////// Standard Header file for the PIC18F4620 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC18F4620 
+....................  
+.................... #list 
+....................  
+.................... #use delay(clock=32M) 
+00004:  CLRF   FEA
+00006:  MOVLW  09
+00008:  MOVWF  FE9
+0000A:  MOVF   FEF,W
+0000C:  BZ    0028
+0000E:  MOVLW  0A
+00010:  MOVWF  01
+00012:  CLRF   00
+00014:  DECFSZ 00,F
+00016:  BRA    0014
+00018:  DECFSZ 01,F
+0001A:  BRA    0012
+0001C:  MOVLW  5F
+0001E:  MOVWF  00
+00020:  DECFSZ 00,F
+00022:  BRA    0020
+00024:  DECFSZ FEF,F
+00026:  BRA    000E
+00028:  GOTO   0066 (RETURN)
+.................... #fuses INTRC_IO, NOFCMEN, NOIESO, PUT, NOBROWNOUT, NOWDT 
+.................... #fuses NOPBADEN, NOMCLR, STVREN, NOLVP, NODEBUG 
+....................  
+....................  
+....................  
+.................... void main(void){ 
+0002C:  CLRF   FF8
+0002E:  BCF    FD0.7
+00030:  MOVF   FC1,W
+00032:  ANDLW  C0
+00034:  IORLW  0F
+00036:  MOVWF  FC1
+00038:  MOVLW  07
+0003A:  MOVWF  FB4
+0003C:  MOVLW  80
+0003E:  MOVWF  05
+00040:  CLRF   06
+00042:  CLRF   07
+....................        
+....................       unsigned int8 bitEstados = 128;      //Variable inicializada con un valor de [10000000] en binario 
+....................       unsigned int8 resultado = 0;         //Variable para guardar el resultado del desplazamiento 
+....................       unsigned int8 varDesplazar = 0;      //Variable contador de numero de bits a desplazar 
+....................       SET_TRIS_B(0x00); 
+00044:  MOVLW  00
+00046:  MOVWF  F93
+....................       setup_oscillator(OSC_32MHZ); 
+00048:  MOVLW  70
+0004A:  MOVWF  FD3
+0004C:  MOVLW  40
+0004E:  MOVWF  F9B
+00050:  MOVF   FD3,W
+....................        
+....................        
+....................       while(true){ 
+....................           
+....................          bitEstados >>= 1; 
+00052:  BCF    FD8.0
+00054:  RRCF   05,F
+....................          output_b(resultado); 
+00056:  CLRF   F93
+00058:  MOVFF  06,F8A
+....................          delay_ms(500); 
+0005C:  MOVLW  02
+0005E:  MOVWF  08
+00060:  MOVLW  FA
+00062:  MOVWF  09
+00064:  BRA    0004
+00066:  DECFSZ 08,F
+00068:  BRA    0060
+....................         
+....................          varDesplazar++; 
+0006A:  INCF   07,F
+....................          
+....................          if(varDesplazar == 8){ 
+0006C:  MOVF   07,W
+0006E:  SUBLW  08
+00070:  BNZ   0076
+....................             bitEstados = 128; 
+00072:  MOVLW  80
+00074:  MOVWF  05
+....................              
+....................          }      
+00076:  BRA    0052
+....................       } 
+....................        
+....................    
+.................... } 
+00078:  SLEEP 
+
+Configuration Fuses:
+   Word  1: 0800   INTRC_IO NOFCMEN NOIESO
+   Word  2: 1E18   PUT NOBROWNOUT BORV21 NOWDT WDT32768
+   Word  3: 0500   CCP2C1 NOPBADEN LPT1OSC NOMCLR
+   Word  4: 0081   STVREN NOLVP NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

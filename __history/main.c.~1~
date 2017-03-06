@@ -16,15 +16,14 @@ void main(void){
       
       while(true){
          
-         bitEstados >>= 1;
+         resultado = bitEstados >> varDesplazar;
          output_b(resultado);
          delay_ms(500);
        
          varDesplazar++;
         
          if(varDesplazar == 8){
-            bitEstados = 128;
-            
+            varDesplazar = 0;
          }     
       }
       
