@@ -17,7 +17,7 @@ void main(void){
       while(true){
          
          bitEstados >>= 1;
-         output_b(bitEstados);
+         output_b(resultado);
          delay_ms(500);
        
          varDesplazar++;
