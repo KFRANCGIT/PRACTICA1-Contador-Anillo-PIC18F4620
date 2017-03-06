@@ -7,7 +7,7 @@
 
 void main(void){
       
-      unsigned int16 bitEstados = 0x8000;      //Variable inicializada con un valor de [10000000] en binario
+      unsigned int8 bitEstados = 128;      //Variable inicializada con un valor de [10000000] en binario
       unsigned int8 resultado = 0;         //Variable para guardar el resultado del desplazamiento
       unsigned int8 varDesplazar = 0;      //Variable contador de numero de bits a desplazar
       SET_TRIS_B(0x00);
@@ -23,7 +23,7 @@ void main(void){
          varDesplazar++;
         
          if(varDesplazar == 8){
-            bitEstados = 0x8000;
+            bitEstados = 128;
             
          }     
       }

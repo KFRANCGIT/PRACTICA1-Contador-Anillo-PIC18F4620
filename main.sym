@@ -3,11 +3,11 @@
 001     _RETURN_
 002     @SCRATCH
 003     @SCRATCH
-005     main.bitEstados
-006     main.resultado
-007     main.varDesplazar
-008     main.@SCRATCH1
-009     @delay_ms1.P1
+005-006 main.bitEstados
+007     main.resultado
+008     main.varDesplazar
+009     main.@SCRATCH1
+00A     @delay_ms1.P1
 F83     PSP_DATA
 FB4.6   C1OUT
 FB4.7   C2OUT
@@ -36,10 +36,10 @@ Project Directory:
     D:\OneDrive\INGENIERIA TELEMATICA\4° Semestre\Sistemas Embebidos\PRACTICA1\
 
 Project Files:
-    main.c                                                  [05-mar.-17 22:14  CRC=85C53C41]
+    main.c                                                  [05-mar.-17 22:32  CRC=3E1B6FFA]
     C:\Program Files (x86)\PICC\Devices\18f4620.h           [10-sep.-13 16:34  CRC=044A57BA]
 
-Source signature=8E59EBB5
+Source signature=46B01F6E
 
 Units:
     main (main)

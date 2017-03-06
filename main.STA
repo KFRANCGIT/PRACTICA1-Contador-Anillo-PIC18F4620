@@ -1,12 +1,12 @@
 
-ROM used:   122/65536 (0%)
-            122/65536 (0%) including unused fragments
+ROM used:   128/65536 (0%)
+            128/65536 (0%) including unused fragments
 
             0.1 Average locations per line
-            11.1 Average locations per statement
+            11.6 Average locations per statement
 
-RAM used:   8/3968 (0%) at main() level
-            9/3968 (0%) worst case
+RAM used:   9/3968 (0%) at main() level
+            10/3968 (0%) worst case
 
 Stack used: 1 worst case (1 in main + 0 for interrupts)
 Stack size: 31
@@ -21,16 +21,16 @@ Lines Stmts  %   Files
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
 0     40  16    1             @delay_ms1
-0     78  32    4   300  4.8  main
+0     84  33    5   302  4.7  main
  Inline         0             @cinit1
 
 Program metrics:
     Functions               1
     Statements              11
     Comments                152
-    Volume (V)              304
-    Difficulty (D)          4.5
-    Effort to implement (E) 1370
+    Volume (V)              307
+    Difficulty (D)          4.3
+    Effort to implement (E) 1334
     Time to implement (T)   1 minutes
     Est Delivered Bugs (B)  0
     Cyclomatic Complexity   1
@@ -39,7 +39,7 @@ Program metrics:
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
-00004-0FFFE   118  65414  
+00004-0FFFE   124  65408  
 
 
 
