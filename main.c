@@ -6,27 +6,39 @@
 
 
 void main(void){
+
+    
+      unsigned int8 contador1 = 128;   
+      unsigned int8 contador2 = 8;
+      unsigned int8 resultado = 0;       
+      unsigned int8 varDesplazar = 0; 
+      unsigned int8 varDesplazar2 = 0;
       
-      unsigned int16 bitEstados = 0x8000;      //Variable inicializada con un valor de [10000000] en binario
-      unsigned int8 resultado = 0;         //Variable para guardar el resultado del desplazamiento
-      unsigned int8 varDesplazar = 0;      //Variable contador de numero de bits a desplazar
-      SET_TRIS_B(0x00);
+    
       setup_oscillator(OSC_32MHZ);
       
+      set_tris_a(0b110101);
+      set_tris_b(0b00110000);
+      set_tris_c(0b10101010);
+      set_tris_d(0x00);
       
       while(true){
          
-         bitEstados >>= 1;
-         output_b(resultado);
+        
+        contador1 >>=1;
+         output_d(contador1);
+         
+         contador2>>=1;
+         output_d(contador2);
          delay_ms(500);
-       
+         
          varDesplazar++;
         
          if(varDesplazar == 8){
-            bitEstados = 0x8000;
-            
+            contador1 = 128;
+            contador2 = 128;
+            varDesplazar = 0;
+          
          }     
       }
-      
-  
 }

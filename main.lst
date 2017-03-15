@@ -1,11 +1,11 @@
-CCS PCH C Compiler, Version 5.012, 41559               05-mar.-17 22:32
+CCS PCH C Compiler, Version 5.012, 41559               13-mar.-17 12:54
 
                Filename:   D:\OneDrive\INGENIERIA TELEMATICA\4° Semestre\Sistemas Embebidos\PRACTICA1\main.lst
 
-               ROM used:   128 bytes (0%)
-                           Largest free fragment is 65408
-               RAM used:   9 (0%) at main() level
-                           10 (0%) worst case
+               ROM used:   154 bytes (0%)
+                           Largest free fragment is 65382
+               RAM used:   10 (0%) at main() level
+                           11 (0%) worst case
                Stack used: 1 locations
                Stack size: 31
 
@@ -28,7 +28,7 @@ CCS PCH C Compiler, Version 5.012, 41559               05-mar.-17 22:32
 ....................  
 .................... #use delay(clock=32M) 
 00004:  CLRF   FEA
-00006:  MOVLW  0A
+00006:  MOVLW  0B
 00008:  MOVWF  FE9
 0000A:  MOVF   FEF,W
 0000C:  BZ    0028
@@ -45,7 +45,7 @@ CCS PCH C Compiler, Version 5.012, 41559               05-mar.-17 22:32
 00022:  BRA    0020
 00024:  DECFSZ FEF,F
 00026:  BRA    000E
-00028:  GOTO   006A (RETURN)
+00028:  GOTO   0082 (RETURN)
 .................... #fuses INTRC_IO, NOFCMEN, NOIESO, PUT, NOBROWNOUT, NOWDT 
 .................... #fuses NOPBADEN, NOMCLR, STVREN, NOLVP, NODEBUG 
 ....................  
@@ -61,17 +61,21 @@ CCS PCH C Compiler, Version 5.012, 41559               05-mar.-17 22:32
 00038:  MOVLW  07
 0003A:  MOVWF  FB4
 0003C:  MOVLW  80
-0003E:  MOVWF  06
-00040:  CLRF   05
-00042:  CLRF   07
-00044:  CLRF   08
+0003E:  MOVWF  05
+00040:  MOVLW  08
+00042:  MOVWF  06
+00044:  CLRF   07
+00046:  CLRF   08
+00048:  CLRF   09
+....................  
+....................      
+....................       unsigned int8 contador1 = 128;    
+....................       unsigned int8 contador2 = 8; 
+....................       unsigned int8 resultado = 0;        
+....................       unsigned int8 varDesplazar = 0;  
+....................       unsigned int8 varDesplazar2 = 0; 
 ....................        
-....................       unsigned int16 bitEstados = 0x8000;      //Variable inicializada con un valor de [10000000] en binario 
-....................       unsigned int8 resultado = 0;         //Variable para guardar el resultado del desplazamiento 
-....................       unsigned int8 varDesplazar = 0;      //Variable contador de numero de bits a desplazar 
-....................       SET_TRIS_B(0x00); 
-00046:  MOVLW  00
-00048:  MOVWF  F93
+....................      
 ....................       setup_oscillator(OSC_32MHZ); 
 0004A:  MOVLW  70
 0004C:  MOVWF  FD3
@@ -79,44 +83,64 @@ CCS PCH C Compiler, Version 5.012, 41559               05-mar.-17 22:32
 00050:  MOVWF  F9B
 00052:  MOVF   FD3,W
 ....................        
+....................       set_tris_a(0b110101); 
+00054:  MOVLW  35
+00056:  MOVWF  F92
+....................       set_tris_b(0b00110000); 
+00058:  MOVLW  30
+0005A:  MOVWF  F93
+....................       set_tris_c(0b10101010); 
+0005C:  MOVLW  AA
+0005E:  MOVWF  F94
+....................       set_tris_d(0x00); 
+00060:  MOVLW  00
+00062:  MOVWF  F95
 ....................        
 ....................       while(true){ 
 ....................           
-....................          bitEstados >>= 1; 
-00054:  BCF    FD8.0
-00056:  RRCF   06,F
-00058:  RRCF   05,F
-....................          output_b(resultado); 
-0005A:  CLRF   F93
-0005C:  MOVFF  07,F8A
+....................          
+....................         contador1 >>=1; 
+00064:  BCF    FD8.0
+00066:  RRCF   05,F
+....................          output_d(contador1); 
+00068:  CLRF   F95
+0006A:  MOVFF  05,F8C
+....................           
+....................          contador2>>=1; 
+0006E:  BCF    FD8.0
+00070:  RRCF   06,F
+....................          output_d(contador2); 
+00072:  CLRF   F95
+00074:  MOVFF  06,F8C
 ....................          delay_ms(500); 
-00060:  MOVLW  02
-00062:  MOVWF  09
-00064:  MOVLW  FA
-00066:  MOVWF  0A
-00068:  BRA    0004
-0006A:  DECFSZ 09,F
-0006C:  BRA    0064
-....................         
+00078:  MOVLW  02
+0007A:  MOVWF  0A
+0007C:  MOVLW  FA
+0007E:  MOVWF  0B
+00080:  BRA    0004
+00082:  DECFSZ 0A,F
+00084:  BRA    007C
+....................           
 ....................          varDesplazar++; 
-0006E:  INCF   08,F
+00086:  INCF   08,F
 ....................          
 ....................          if(varDesplazar == 8){ 
-00070:  MOVF   08,W
-00072:  SUBLW  08
-00074:  BNZ   007C
-....................             bitEstados = 0x8000; 
-00076:  MOVLW  80
-00078:  MOVWF  06
-0007A:  CLRF   05
-....................              
+00088:  MOVF   08,W
+0008A:  SUBLW  08
+0008C:  BNZ   0096
+....................             contador1 = 128; 
+0008E:  MOVLW  80
+00090:  MOVWF  05
+....................             contador2 = 128; 
+00092:  MOVWF  06
+....................             varDesplazar = 0; 
+00094:  CLRF   08
+....................            
 ....................          }      
-0007C:  BRA    0054
+00096:  BRA    0064
 ....................       } 
-....................        
-....................    
 .................... } 
-0007E:  SLEEP 
+00098:  SLEEP 
 
 Configuration Fuses:
    Word  1: 0800   INTRC_IO NOFCMEN NOIESO
